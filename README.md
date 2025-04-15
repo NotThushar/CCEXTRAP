@@ -1,58 +1,60 @@
+# Made some major changes and fixed the line 133 error HaHa 
+ and traslated the readme in english ;) huehue
 # CCEXTRAP (PHP)
 
-CCEXTRAP adalah sebuah skrip PHP yang memungkinkan Anda untuk menghasilkan beberapa nomor kartu kredit (Credit Card) secara otomatis sesuai dengan jumlah yang Anda inginkan. Selain itu, skrip ini juga dilengkapi dengan fitur untuk memeriksa status kartu kredit tersebut, apakah Live, Die, atau Unknow.
+CCEXTRAP is a PHP script that allows you to generate multiple credit card numbers automatically according to the amount you want. In addition, this script is also equipped with a feature to check the status of the credit card, whether Live, Die, or Unknow.
 
-## Fitur Utama
+## Main Features
 
-- **Generate Kartu Kredit**: Menghasilkan nomor kartu kredit berdasarkan BIN (Bank Identification Number) yang Anda masukkan.
-- **Cek Status Otomatis**: Memeriksa status kartu kredit yang dihasilkan (Live, Die, atau Unknow) secara otomatis.
-- **Cek Status Manual**: Memungkinkan Anda untuk memeriksa status kartu kredit secara manual melalui website.
+- **Generate Credit Card**: Generates credit card numbers based on the BIN (Bank Identification Number) you enter.
+- **Automatic Status Check**: Checks the status of the generated credit card (Live, Die, or Unknow) automatically.
+- **Manual Status Check**: Allows you to check the credit card status manually via the website.
 
-## Instalasi
+## Installation
 
-Berikut adalah langkah-langkah untuk menginstal dan menjalankan skrip CCEXTRAP:
+Here are the steps to install and run the CCEXTRAP script:
 
 1. **Clone Repository**:
 
-   ```bash
-   git clone https://github.com/hndko/CCEXTRAP
-   ```
+```bash
+git clone https://github.com/hndko/CCEXTRAP
+```
 
-2. **Masuk ke Direktori CCEXTRAP**:
+2. **Enter the CCEXTRAP Directory**:
 
-   ```bash
-   cd CCEXTRAP
-   ```
+```bash
+cd CCEXTRAP
+```
 
-3. **Jalankan Skrip**:
-   ```bash
-   php run.php
-   ```
+3. **Run the Script**:
+```bash
+php run.php
+```
 
-## Petunjuk Penggunaan
+## Instructions
 
-Setelah skrip dijalankan, Anda akan diminta untuk memasukkan beberapa informasi:
+After the script is run, you will be asked to enter some information:
 
-1. **Bin**: Masukkan BIN (Bank Identification Number) yang Anda inginkan.
-2. **Check Status Valid**: Pilih salah satu opsi berikut:
-   - **1**: Auto Check Status (Live, Die, atau Unknow) untuk setiap kartu kredit yang dihasilkan.
-   - **2**: Manual Check Status (Anda akan memeriksa status secara manual melalui website).
-3. **Amount/Jumlah**: Masukkan jumlah kartu kredit yang ingin Anda generate.
+1. **Bin**: Enter the BIN (Bank Identification Number) you want.
+2. **Check Status Valid**: Select one of the following options:
+- **1**: Auto Check Status (Live, Die, or Unknow) for each credit card generated.
+- **2**: Manual Check Status (You will check the status manually through the website).
+3. **Amount**: Enter the number of credit cards you want to generate.
 
 ## Screenshot
 
-Berikut adalah contoh tampilan dari skrip CCEXTRAP:
+Here is an example of what the CCEXTRAP script looks like:
 
 ![Screenshot 2025-02-24 094259](https://github.com/user-attachments/assets/c47552b5-9ebc-41ae-af7f-4bf5062a8ee2)
 
-## Kontribusi
+## Contributions
 
-Jika Anda ingin berkontribusi pada pengembangan skrip ini, silakan fork repository ini dan buat pull request dengan perubahan yang Anda usulkan.
+If you would like to contribute to the development of this script, please fork this repository and create a pull request with your proposed changes.
 
-## Lisensi
+## License
 
-Skrip ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT). Silakan merujuk ke file `LICENSE` untuk informasi lebih lanjut.
+This script is licensed under the [MIT License](https://opensource.org/licenses/MIT). Please refer to the `LICENSE` file for more information.
 
 ---
 
-Dengan panduan ini, Anda dapat dengan mudah menginstal dan menggunakan skrip CCEXTRAP untuk menghasilkan dan memeriksa status kartu kredit. Selamat mencoba!
+With this guide, you can easily install and use the CCEXTRAP script to generate and check credit card status. Good luck!
