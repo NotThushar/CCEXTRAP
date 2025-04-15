@@ -4,7 +4,7 @@ echo ("###############################################\n");
 echo ("#     Auto Generate + Checker CC Extrap       #\n");
 echo ("###############################################\n");
 echo ("# Create By      : Kyoo                       #\n");
-echo ("# Languange      : PHP                        #\n");
+echo ("# fixed by      : Not Thushar                 #\n");
 echo ("# Special Thanks : Mari Partner               #\n");
 echo ("###############################################\n");
 echo "[+] BIN : ";
