@@ -109,41 +109,76 @@ class CC
         fclose($fopen);
     }
     protected function Check($card)
-    {
-        $headers = array();
-        $headers[] = 'origin: https://uncoder.eu.org';
-        $headers[] = 'accept-language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7';
-        $headers[] = 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36';
-        $headers[] = 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8';
-        $headers[] = 'Accept: */*';
-        $headers[] = 'referer: https://uncoder.eu.org/cc-checker/';
-        $headers[] = 'X-Requested-With: XMLHttpRequest';
-        $headers[] = 'Connection: keep-alive';
-        $ch = curl_init();
-        $options = array(
-            CURLOPT_URL             => "https://uncoder.eu.org/cc-checker/api.php",
-            CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_POST            => true,
-            CURLOPT_POSTFIELDS      => "data=" . urlencode($card),
-            CURLOPT_HTTPHEADER      => $headers
-        );
-        curl_setopt_array($ch, $options);
-        $exec = curl_exec($ch);
-        $status = json_decode($exec);
-        switch ($status->error) {
-            case '2':
-                return $card . $this->color("red", " [ DIE ]");
-                break;
-            case '3':
-                return $card . $this->color("grey", " [ UNKNOWN ]");
-                break;
-            case '4':
-                return $card . $this->color("yellow", " [ CC NOT VALID ]");
-                break;
-            case '1':
-                // $this->Save("Result-".$this->bin.".list", $card."\n");
-                return $card . $this->color("green", " [ LIVE ]");
-                break;
-        }
+{
+    $headers = array(
+        'origin: https://uncoder.eu.org',
+        'accept-language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
+        'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36',
+        'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
+        'Accept: */*',
+        'referer: https://uncoder.eu.org/cc-checker/',
+        'X-Requested-With: XMLHttpRequest',
+        'Connection: keep-alive',
+    );
+
+    $ch = curl_init();
+    $options = array(
+        CURLOPT_URL             => "https://uncoder.eu.org/cc-checker/api.php",
+        CURLOPT_RETURNTRANSFER  => true,
+        CURLOPT_POST            => true,
+        CURLOPT_POSTFIELDS      => "data=" . urlencode($card),
+        CURLOPT_HTTPHEADER      => $headers,
+        CURLOPT_FOLLOWLOCATION  => true, // Follow redirects if any
+        CURLOPT_TIMEOUT         => 30,   // Set timeout to avoid hanging
+        CURLOPT_SSL_VERIFYPEER => false, // Temporary workaround
+        CURLOPT_SSL_VERIFYHOST => false, // Temporary workaround
+    );
+
+    curl_setopt_array($ch, $options);
+    $exec = curl_exec($ch);
+
+    // Check for cURL errors
+    if ($exec === false) {
+        $curlError = curl_error($ch);
+        curl_close($ch);
+        return $card . $this->color("red", " [ CURL ERROR: $curlError ]");
     }
+
+    // Get HTTP status code
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    // Check if HTTP response code is not 200
+    if ($httpCode !== 200) {
+        return $card . $this->color("red", " [ HTTP ERROR: $httpCode ]");
+    }
+
+    // Decode JSON response
+    $status = json_decode($exec, true); // Use associative array for simplicity
+
+    // Check if JSON decoding failed
+    if (json_last_error() !== JSON_ERROR_NONE || $status === null) {
+        return $card . $this->color("red", " [ INVALID JSON RESPONSE ]");
+    }
+
+    // Check if 'error' key exists in the response
+    if (!isset($status['error'])) {
+        return $card . $this->color("red", " [ MISSING ERROR FIELD IN RESPONSE ]");
+    }
+
+    // Process the error code
+    switch ($status['error']) {
+        case '2':
+            return $card . $this->color("red", " [ DIE ]");
+        case '3':
+            return $card . $this->color("grey", " [ UNKNOWN ]");
+        case '4':
+            return $card . $this->color("yellow", " [ CC NOT VALID ]");
+        case '1':
+            // $this->Save("Result-".$this->bin.".list", $card."\n");
+            return $card . $this->color("green", " [ LIVE ]");
+        default:
+            return $card . $this->color("red", " [ UNEXPECTED ERROR CODE ]");
+    }
+}
 }
