@@ -1,5 +1,3 @@
-# Made some major changes and fixed the line 133 error HaHa 
- and traslated the readme in english ;) huehue
 # CCEXTRAP (PHP)
 
 CCEXTRAP is a PHP script that allows you to generate multiple credit card numbers automatically according to the amount you want. In addition, this script is also equipped with a feature to check the status of the credit card, whether Live, Die, or Unknow.
